@@ -176,7 +176,7 @@ public class RNSoundModule extends ReactContextBaseJavaModule implements AudioMa
       return mediaPlayer;
     }
 
-    if (fileName.startsWith("http://") || fileName.startsWith("https://")) {
+    if (fileName.startsWith("http://") || fileName.startsWith("https://") || fileName.startsWith("data:audio")) {
       mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
       Log.i("RNSoundModule", fileName);
       try {

@@ -10,7 +10,7 @@ var eventEmitter = new ReactNative.NativeEventEmitter(RNSound);
 var nextKey = 0;
 
 function isRelativePath(path) {
-  return !/^(\/|http(s?)|asset)/.test(path);
+  return !/^(\/|http(s?)|asset|data:)/.test(path);
 }
 
 function calculateRelativeVolume(volume, pan) {
@@ -45,7 +45,7 @@ function Sound(filename, basePath, onError, options) {
     this._filename = basePath ? basePath + '/' + filename : filename;
 
     if (IsAndroid && !basePath && isRelativePath(filename)) {
-      this._filename = filename.toLowerCase().replace(/\.[^.]+$/, '');
+      this._filename = filename.replace(/\.[^.]+$/, '');
     }
   }
 
