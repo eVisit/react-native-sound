@@ -55,12 +55,16 @@
     return _callbackPool;
 }
 
-- (AVAudioPlayer *)playerForKey:(nonnull NSNumber *)key {
+-(AVAudioPlayer*) playerForKey:(nonnull NSNumber*)key {
+  @synchronized([self playerPool]) {
     return [[self playerPool] objectForKey:key];
+  }
 }
 
-- (NSNumber *)keyForPlayer:(nonnull AVAudioPlayer *)player {
+-(NSNumber*) keyForPlayer:(nonnull AVAudioPlayer*)player {
+  @synchronized([self playerPool]) {
     return [[[self playerPool] allKeysForObject:player] firstObject];
+  }
 }
 
 - (RCTResponseSenderBlock)callbackForKey:(nonnull NSNumber *)key {
